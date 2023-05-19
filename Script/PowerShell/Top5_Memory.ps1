@@ -1,0 +1,1 @@
+Get-Process | Sort-Object -Property WorkingSet -Descending | Select-Object -First 5
