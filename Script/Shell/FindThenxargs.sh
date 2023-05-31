@@ -1,0 +1,1 @@
+find /IDC/MPLAN01/ -name "*.*" -newermt "2023-05-30" | xargs -I {} -P 10 -n 1 rsync -avz --progress /IDC/MPLAN01/{} /azure/attach-dcb97-01
