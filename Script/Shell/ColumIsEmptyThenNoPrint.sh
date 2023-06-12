@@ -1,0 +1,1 @@
+passwd -sa | awk '{if($3!="") print $0}' 
