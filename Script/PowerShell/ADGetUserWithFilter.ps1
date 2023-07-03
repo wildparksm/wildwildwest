@@ -1,0 +1,1 @@
+Get-ADUser -Filter {(Description -like "새만금전주6공구")} -Properties * | Select-Object SamAccountName, GivenName,Description, mail
