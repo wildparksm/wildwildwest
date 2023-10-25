@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# AKS 클러스터의 리소스 그룹과 이름을 설정합니다.
+AKS_RESOURCE_GROUP="my-aks-resource-group"
+AKS_CLUSTER_NAME="my-aks-cluster"
+
+# ACR의 리소스 그룹과 이름을 설정합니다.
+ACR_RESOURCE_GROUP="my-acr-resource-group"
+ACR_NAME="my-acr"
+
+# AKS 클러스터에 구성된 서비스 주체의 ID를 가져옵니다.
+CLIENT_ID=$(az aks show --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME --query "servicePrincipal Profile.clientId" --output tsv)
+
+# ACR 레지스트리의 리소스 ID를 가져옵니다.
+ACR_ID=$(az acr show --name $ACR_NAME --resource-group $ACR_RESOURCE_GROUP query "id" --output tsv)
+
+# 서비스 주체에 ACRpull 역할을 할당합니다.
+az role assignment create --assignee $CLIENT_ID --role acrpull scope $ACR_ID
