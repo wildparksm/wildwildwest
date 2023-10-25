@@ -1,0 +1,6 @@
+AzureDiagnostics
+| where Category == "AzureFirewallNetworkRule"
+| where OperationName == "AzureFirewallNetworkRuleLog"
+| where TimeGenerated > ago(7d)
+| where src_ip_s == "10.10.10.1" and dst_ip_s == "100.100.100.1" and dst_port_d == 80
+| project TimeGenerated, msg_s

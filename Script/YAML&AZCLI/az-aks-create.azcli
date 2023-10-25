@@ -1,0 +1,9 @@
+az aks create --resource-group AzureFridayAKS -name AzureFridayAKS
+--enable-addons monitoring, http_application_routing
+--kubernetes-version 1.15.4 -generate-ssh-keys
+--service-principal 7d33fe42-b226-4369-87ab-e7af25a633b --client-secret ab944635-02a5-4fa0-8278-9500f0d333b --node-count 3
+-vm-set-type VirtualMachineScaleSets
+--load-balancer-sku standard
+--enable-cluster-autoscaler A
+-min-count 1
+--max-count 5
