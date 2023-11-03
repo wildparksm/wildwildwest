@@ -1,0 +1,39 @@
+# 리포지토리 시작 페이지에서 설정 탭을 선택합니다. 보안 아래의 메뉴에서 비밀을 선택하고 작업을 선택합니다. 작업 비밀 창이 열립니다.
+
+# 1)새 리포지토리 비밀을 선택합니다.
+
+# ACR_NAME 비밀을 만듭니다.
+
+# 이름에 ACR_NAME을 입력합니다.
+
+# Cloud Shell에서 다음 명령을 실행하여 앞서 만든 Container Registry 인스턴스의 로그인 정보를 가져옵니다.
+az acr list --query "[?contains(resourceGroup, 'mslearn-gh-pipelines')].loginServer" -o table
+
+# 2) 비밀에 Cloud Shell 명령으로 반환된 값을 입력하고 비밀 추가를 선택합니다.
+
+# 새 리포지토리 비밀을 선택하고 ACR_LOGIN 비밀을 만듭니다.
+
+# 이름에 ACR_LOGIN을 입력합니다.
+
+# 설정 스크립트의 끝에 표시된 값을 저장한 경우 ACR 로그인 사용자 이름 값을 복사합니다. 값을 저장하지 않은 경우 Cloud Shell에서 다음 명령을 실행하여 앞서 만든 Container Registry 인스턴스의 로그인 정보를 가져옵니다.
+az acr credential show --name <ACR_NAME> --query "username" -o table
+
+# 비밀에 값을 입력하고 비밀 추가를 선택합니다.
+
+# 새 리포지토리 비밀을 선택하고 ACR_PASSWORD 비밀을 만듭니다.
+
+# 이름에 ACR_PASSWORD를 입력합니다.
+
+# ACR 로그인 암호 값을 복사하거나 Cloud Shell에서 다음 명령을 실행하여 앞서 만든 Container Registry 인스턴스의 로그인 정보를 가져옵니다.
+az acr credential show --name <ACR_NAME> --query "passwords[0].value" -o table
+
+# 작업 다시 실행
+# 작업 탭을 선택합니다.
+
+# 목록에서 실행만 선택합니다.
+
+# 오른쪽에서 작업 다시 실행을 선택한 다음, 모든 작업 다시 실행을 선택합니다.
+
+# 빌드가 완료되면 Cloud Shell을 열고(또는 이미 열려 있는 경우 전환) az acr repository list --name <ACR_NAME> -o table을 실행하여 contoso-website라는 리포지토리가 결과에 표시되는지 확인합니다.
+az acr repository list --name <ACR_NAME> -o table
+
