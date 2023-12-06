@@ -1,0 +1,27 @@
+az group create --name learn-deploy-aci-rg --location eastus
+# az container create 명령에 이름, Docker 이미지 및 Azure 리소스 그룹을 제공하여 컨테이너를 만듭니다. 
+# 필요에 따라 DNS 이름 레이블을 지정하여 컨테이너를 인터넷에 노출할 수 있습니다. 
+# 이 예제에서는 작은 웹앱을 호스트하는 컨테이너를 배포합니다. 이미지를 배치할 위치를 선택할 수도 있습니다.
+# 여기서는 미국 동부 지역을 사용하지만, 본인과 가까운 위치로 변경할 수 있습니다.
+
+
+DNS_NAME_LABEL=aci-demo-$RANDOM
+# DNS 이름을 제공하여 인터넷에 컨테이너를 노출할 수 있습니다. 
+# DNS 이름은 고유해야 합니다. 
+# 학습 목적상 Cloud Shell에서 이 명령을 실행하여 고유한 이름을 저장하는 Bash 변수를 만듭니다.
+
+az container create \
+  --resource-group learn-deploy-aci-rg \
+  --name mycontainer \
+  --image mcr.microsoft.com/azuredocs/aci-helloworld \
+  --ports 80 \
+  --dns-name-label $DNS_NAME_LABEL \
+  --location eastus
+# $DNS_NAME_LABEL은 DNS 이름을 지정합니다. 
+# 이미지 이름 azuredocs/aci-helloworld는 기본 Node.js 웹 애플리케이션을 실행하는 Microsoft Container Registry에 호스트되는 컨테이너 이미지를 말합니다.
+
+  az container show \
+  --resource-group learn-deploy-aci-rg \
+  --name mycontainer \
+  --query "{FQDN:ipAddress.fqdn,ProvisioningState:provisioningState}" \
+  --output table
