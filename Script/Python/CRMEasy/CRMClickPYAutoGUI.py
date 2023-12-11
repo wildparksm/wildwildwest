@@ -3,6 +3,7 @@ import webbrowser
 import time
 import pyperclip
 
+
 # 웹 브라우저를 열고 특정 URL로 이동
 url = 'https://tdg.crm5.dynamics.com/main.aspx?appid=b484f1b8-fa18-eb11-a813-000d3a854084&forceUCI=1&pagetype=entityrecord&etn=serviceappointment'
 webbrowser.open(url)
